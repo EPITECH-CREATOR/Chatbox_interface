@@ -1,0 +1,79 @@
+/* On travaille sur la balise body, donc sur TOUTE la page */
+.bar{
+    background-color: #001971;
+    height: 80px;
+}
+.bar a{
+    display: flex;
+    color: white;
+}
+.bar ul{
+    float: right;
+}
+.bar ul li{
+    display: inline-block;
+    padding: 20px 20px;
+}
+#btn{
+    background-color: yellow;
+    border-radius: 30px;
+}
+
+.left{
+    margin-top: 15px;
+}
+.barr{
+    background-color: #001971;
+    height: 70px;
+}
+.barr a{
+    display: flex;
+    color:azure;
+}
+.barr ul{
+    float: center;
+}
+.barr ul li{
+    display: inline-block;
+    padding: 30px 30px;
+}
+.barrr{
+    background-color: #001971;
+    height: 70px;
+}
+.barrr a{
+    display: flex;
+    color:azure;
+}
+.barrr ul{
+    float: center;
+}
+.barrr ul li{
+    display: inline-block;
+    padding: 30px 30px;
+}
+h3
+{
+    color:azure;
+}
+h5
+{
+    color:black;
+}
+
+
+.back{
+    background-image: url(./Chatbox_interface/images/Connexion.jpg);
+}
+
+.dot {
+    height: 13px;
+    width: 13px;
+    background-color:azure;
+    border-radius: 100%;
+    display: inline-block;
+  }
+  .dot h5{
+      font-size: 10px;
+      font-weight: 800;
+  }
