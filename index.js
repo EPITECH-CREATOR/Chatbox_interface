@@ -33,7 +33,9 @@ app.post('/inscription', [
   check('UserPassword').notEmpty().withMessage(requiredMessage)
   .isLength({min: 8}).withMessage("Le mot de passe doit contenir au moins 8 caractères, un 1 nombre et une lettre")
   .matches(/\S*(\S*([a-zA-Z]\S*[0-9])|([0-9]\S*[a-zA-Z]))\S*/)
-  .withMessage("Le mot de passe doit contenir au moins 1 nombre et un caractère special"),
+  .withMessage("Le mot de passe doit contenir au moins 1 nombre et un caractère special").exists(),
+  check('UserPassword2', 'password confirmation must have the same').exists()
+  .custom ((value, {req}) => value == req.body.UserPassword),
 ], (req, res) => {
   const errors = validationResult(req);
 
