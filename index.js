@@ -5,8 +5,12 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const path = require('path')
 const app = express()
+//const url_db = "mongodb://mongo:27017/mytest" Pour déploiement
+const url_db = "mongodb://localhost:27017/CREATOR";
 var requiredMessage = "Le champ ne doit pas etre vide"
-
+var module_mongo = require("./MyMongo/MyMongo");
+var Mymongo = new module_mongo(url_db, "CREATOR");
+var User = require("./Models/User")
 app.set('views', path.join(__dirname))
 app.set("view engine", "ejs")
 
@@ -34,7 +38,7 @@ app.post('/inscription', [
   .isLength({min: 8}).withMessage("Le mot de passe doit contenir au moins 8 caractères, un 1 nombre et une lettre")
   .matches(/\S*(\S*([a-zA-Z]\S*[0-9])|([0-9]\S*[a-zA-Z]))\S*/)
   .withMessage("Le mot de passe doit contenir au moins 1 nombre et un caractère special").exists(),
-  check('UserPassword2', 'password confirmation must have the same').exists()
+  check('UserPassword2', 'la confirmation du mot de passe doit etre identique').exists()
   .custom ((value, {req}) => value == req.body.UserPassword),
 ], (req, res) => {
   const errors = validationResult(req);
@@ -43,6 +47,14 @@ app.post('/inscription', [
     res.json(errors)
   }
   else {
+    var user = new User(
+      req.body["UserNom"],
+      req.body["UserPrenom"],
+      req.body["UserAge"],
+      req.body["UserEmail"],
+      req.body["UserPassword"],
+  );
+    Mymongo.insertOneDataUser(user.dataToObject(), "users")
     res.send("Successfully validated")
   }
 });
